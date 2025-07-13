@@ -1,4 +1,4 @@
-import fitz
+import pymupdf as fitz
 import streamlit as st
 import tempfile
 from pathlib import Path
