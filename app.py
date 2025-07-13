@@ -1,4 +1,4 @@
-import pymupdf as fitz
+import pymupdf
 import streamlit as st
 import tempfile
 from pathlib import Path
@@ -29,12 +29,12 @@ footer_height = st.number_input(
 )
 
 def redact_footer_fixed_position(input_path: str, output_path: str, footer_height: float):
-    doc = fitz.open(input_path)
+    doc = pymupdf.open(input_path)
 
     for page in doc:
         width, height = page.rect.width, page.rect.height
 
-        footer_rect = fitz.Rect(
+        footer_rect = pymupdf.Rect(
             0,
             height - footer_height,
             width,
@@ -69,7 +69,7 @@ if uploaded_files and st.button("Remove Footer from All PDFs"):
         # Generate and store previews
         preview_paths = []
         try:
-            doc = fitz.open(output_path)
+            doc = pymupdf.open(output_path)
             num_pages = min(3, len(doc))  # Display up to 3 pages as per your query
             
             for page_num in range(num_pages):
